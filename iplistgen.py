@@ -54,4 +54,4 @@ if path.isfile(ip_file): # File is OK:
                 print(f"{range},",end="")
 else:
     error(f"Could not open file: {ip_file}")
-print("")
+print("") # clean up terminal
