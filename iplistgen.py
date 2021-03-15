@@ -8,16 +8,20 @@ import sys
 from os import path
 from re import match
 from re import sub
-def usage():
-    print(f"\nUsage: ./iplistgen.py (file containing client's IPs and IP ranges.)\n")
-    sys.exit(1)
+import argparse
+## Wow, this is a nice library! :)
+parser = argparse.ArgumentParser(description='Process IP lists provided by client.')
+parser.add_argument('--ipfile', dest='ip_file', metavar='(IP list file)',
+                    help='File passed to iplistgen with IP ranges.')
+args = parser.parse_args()
+
+## Custom functions:
 def error(msg):
     print(f"[!] ERROR: {msg}")
     sys.exit(1)
-if len(sys.argv)!=2:
-    usage()
+
 ## OK, we got a file to test:
-ip_file=sys.argv[1]
+ip_file=args.ip_file
 if path.isfile(ip_file): # File is OK:
     with open(ip_file,"r") as fh:
         for line in fh:
